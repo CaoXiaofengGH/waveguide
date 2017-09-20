@@ -2,7 +2,7 @@
 
 平板波导cxf_slab_waveguide ；
 光纤波导cxf_fiber_waveguide ；
-矩形波导cxf_rectangle_waveguid ；
+矩形波导cxf_rectangle_waveguide ；
 
 三个matlab程序分别计算了电磁波在平板波导、光纤、矩形波导中传播的各项参数，
 计算并得出它们在各种波导中的电场、磁场、能量场的空间表达，
