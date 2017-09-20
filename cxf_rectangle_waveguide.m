@@ -1,46 +1,46 @@
-%*************************µ¼²¨¹âÑ§-¾ØĞÎ²¨µ¼_Homework3**********************
-%*********************************by²ÜÏş·å ********************************
+%*************************å¯¼æ³¢å…‰å­¦-çŸ©å½¢æ³¢å¯¼_Homework3**********************
+%*********************************byæ›¹æ™“å³° ********************************
 clear;
 close all;
 
 syms Kx Ky X Y;
 
-%³õÊ¼²ÎÊı
-n1=1.4549;  %¾ØĞÎÖĞĞÄÕÛÉäÂÊ
-n2=1.444;   %ÉÏ²àÕÛÉäÂÊ
-n3=1.444;   %ÏÂ²à
-n4=1.444;   %×ó²à
-n5=1.444;   %ÓÒ²à
+%åˆå§‹å‚æ•°
+n1=1.4549;  %çŸ©å½¢ä¸­å¿ƒæŠ˜å°„ç‡
+n2=1.444;   %ä¸Šä¾§æŠ˜å°„ç‡
+n3=1.444;   %ä¸‹ä¾§
+n4=1.444;   %å·¦ä¾§
+n5=1.444;   %å³ä¾§
 
-a=4e-6;         %¾ØĞÎ³¤¶È
-b=4e-6;         %¾ØĞÎ¿í¶È
-lambda=1.5e-6;  %²¨³¤
-k0=2*pi/lambda; %²¨Êı
-c0=2.99792e8;   %Õæ¿Õ¹âËÙ
-w=k0*c0;        %Ô²ÆµÂÊ
-u0=pi*4e-7;     %Õâ¿Õ½éµç³£Êı
+a=4e-6;         %çŸ©å½¢é•¿åº¦
+b=4e-6;         %çŸ©å½¢å®½åº¦
+lambda=1.5e-6;  %æ³¢é•¿
+k0=2*pi/lambda; %æ³¢æ•°
+c0=2.99792e8;   %çœŸç©ºå…‰é€Ÿ
+w=k0*c0;        %åœ†é¢‘ç‡
+u0=pi*4e-7;     %è¿™ç©ºä»‹ç”µå¸¸æ•°
 
-%Ë¥¼õÒò×Ó
+%è¡°å‡å› å­
 alpha4x(Kx)=sqrt((k0^2)*(n1^2-n4^2)-Kx^2);
 alpha5x(Kx)=sqrt((k0^2)*(n1^2-n5^2)-Kx^2);
 alpha2y(Ky)=sqrt((k0^2)*(n1^2-n2^2)-Ky^2);
 alpha3y(Ky)=sqrt((k0^2)*(n1^2-n3^2)-Ky^2);
 
-%KÖµµÄÓĞĞ§È¡Öµ·¶Î§
+%Kå€¼çš„æœ‰æ•ˆå–å€¼èŒƒå›´
 limitKx=min(k0*sqrt(n1^2-n4^2),k0*sqrt(n1^2-n5^2));
 limitKy=min(k0*sqrt(n1^2-n2^2),k0*sqrt(n1^2-n3^2));
 
-%É«É¢·½³Ì
+%è‰²æ•£æ–¹ç¨‹
 G(Kx)=tan(2*Kx*a);
 ExF(Kx)=n1^2*Kx*(alpha4x(Kx)*n5^2+alpha5x(Kx)*n4^2)/((n4*n5*Kx)^2-(n1^4*alpha4x(Kx)*alpha5x(Kx)));
 R(Ky)=tan(2*Ky*b);
 ExS(Ky)=Ky*(alpha2y(Ky)+alpha3y(Ky))/(Ky^2-alpha2y(Ky)*alpha3y(Ky));
 
-%·½³Ì×óÓÒÁ½Ê½Ïà¼õ
+%æ–¹ç¨‹å·¦å³ä¸¤å¼ç›¸å‡
 subxEx(Kx)=ExF(Kx)-G(Kx);
 subyEx(Ky)=ExS(Ky)-R(Ky);
 
-%»­É«É¢·½³ÌÍ¼ĞÎ
+%ç”»è‰²æ•£æ–¹ç¨‹å›¾å½¢
 figure(1);
 ezplot(G(Kx),[0,1.05*limitKx])
 hold on;
@@ -55,62 +55,62 @@ ezplot(ExS(Ky),[0,1.05*limitKy])
 hold on;
 title('Graphic');
 
-%******************Çó½âExÄ£Ê½µÄ±¾Õ÷·½³ÌÖĞµÄKx********************
-nKx=0;                                         %½âµÄ¸öÊı¼ÆÊı
-solutionKx=zeros(2,8);                         %¸÷¸ö½â,Ò»°ãÉÙÓÚ8¸ö
-for Kx=0.01*limitKx:0.01*limitKx:limitKx       %ÒÔ¼ä¸ô0.01³õ²½Ñ­»·ÅĞ¶Ï
-    if abs(subxEx(Kx))>2                       %ÂË¹ı×óÓÒÊ½Ïà²î½Ï´óµÄµã
+%******************æ±‚è§£Exæ¨¡å¼çš„æœ¬å¾æ–¹ç¨‹ä¸­çš„Kx********************
+nKx=0;                                         %è§£çš„ä¸ªæ•°è®¡æ•°
+solutionKx=zeros(2,8);                         %å„ä¸ªè§£,ä¸€èˆ¬å°‘äº8ä¸ª
+for Kx=0.01*limitKx:0.01*limitKx:limitKx       %ä»¥é—´éš”0.01åˆæ­¥å¾ªç¯åˆ¤æ–­
+    if abs(subxEx(Kx))>2                       %æ»¤è¿‡å·¦å³å¼ç›¸å·®è¾ƒå¤§çš„ç‚¹
         continue;
     end
-    if eval(subxEx(Kx)*subxEx(Kx+0.01*limitKx))<=0    %ÕÒµ½¼ä¸ôÎª0.01µÄÁ½¸öº¯ÊıÖµÒìºÅµÄ³õ²½µã
+    if eval(subxEx(Kx)*subxEx(Kx+0.01*limitKx))<=0    %æ‰¾åˆ°é—´éš”ä¸º0.01çš„ä¸¤ä¸ªå‡½æ•°å€¼å¼‚å·çš„åˆæ­¥ç‚¹
         tempe=Kx;
-           %´ÓÒìºÅ³õ²½µã¿ªÊ¼ÒÔ¼ä¸ô0.0001¾«È·Ñ­»·ÅĞ¶Ï
-        while eval(subxEx(tempe)*subxEx(tempe+0.0001*limitKx))>0    %Ñ­»·ÅĞ¶ÏÕÒµ½¾«È·µÄÒìºÅµã
+           %ä»å¼‚å·åˆæ­¥ç‚¹å¼€å§‹ä»¥é—´éš”0.0001ç²¾ç¡®å¾ªç¯åˆ¤æ–­
+        while eval(subxEx(tempe)*subxEx(tempe+0.0001*limitKx))>0    %å¾ªç¯åˆ¤æ–­æ‰¾åˆ°ç²¾ç¡®çš„å¼‚å·ç‚¹
             tempe=tempe+0.0001*limitKx;
         end
-            solutionKx(1,nKx+1)=tempe;          %½«ÒìºÅµãµÄºá×ø±êÖµ¼´Îªµ¼Ä£µÄÊıÖµ½â
-            solutionKx(2,nKx+1)=tan(2*a*tempe);   %ÒìºÅµãµÄ×İ×ø±êÖµ
-            nKx=nKx+1;                          %¼ÆËã½âµÄ¸öÊı
+            solutionKx(1,nKx+1)=tempe;          %å°†å¼‚å·ç‚¹çš„æ¨ªåæ ‡å€¼å³ä¸ºå¯¼æ¨¡çš„æ•°å€¼è§£
+            solutionKx(2,nKx+1)=tan(2*a*tempe);   %å¼‚å·ç‚¹çš„çºµåæ ‡å€¼
+            nKx=nKx+1;                          %è®¡ç®—è§£çš„ä¸ªæ•°
     end
 end
-solutionKx                                      %ÏÔÊ¾¸÷¸ö½â
-fprintf('ExÄ£Ê½¹²ÓĞ%d¸öÓĞĞ§KxÖµ\n',nKx);         %±íÃ÷ÓĞĞ§½âÊıÁ¿
+solutionKx                                      %æ˜¾ç¤ºå„ä¸ªè§£
+fprintf('Exæ¨¡å¼å…±æœ‰%dä¸ªæœ‰æ•ˆKxå€¼\n',nKx);         %è¡¨æ˜æœ‰æ•ˆè§£æ•°é‡
 
-%******************Çó½âExÄ£Ê½µÄ±¾Õ÷·½³ÌÖĞµÄKy********************
-nKy=0;                                          %½âµÄ¸öÊı¼ÆÊı
-solutionKy=zeros(2,8);                          %¸÷¸ö½â,Ò»°ãÉÙÓÚ8¸ö
-for Ky=0.01*limitKy:0.01*limitKy:limitKy        %ÒÔ¼ä¸ô0.01³õ²½Ñ­»·ÅĞ¶Ï
-    if abs(subyEx(Ky))>2                        %ÂË¹ı×óÓÒÊ½Ïà²î½Ï´óµÄµã
+%******************æ±‚è§£Exæ¨¡å¼çš„æœ¬å¾æ–¹ç¨‹ä¸­çš„Ky********************
+nKy=0;                                          %è§£çš„ä¸ªæ•°è®¡æ•°
+solutionKy=zeros(2,8);                          %å„ä¸ªè§£,ä¸€èˆ¬å°‘äº8ä¸ª
+for Ky=0.01*limitKy:0.01*limitKy:limitKy        %ä»¥é—´éš”0.01åˆæ­¥å¾ªç¯åˆ¤æ–­
+    if abs(subyEx(Ky))>2                        %æ»¤è¿‡å·¦å³å¼ç›¸å·®è¾ƒå¤§çš„ç‚¹
         continue;
     end
-    if eval(subyEx(Ky)*subyEx(Ky+0.01*limitKy))<=0    %ÕÒµ½¼ä¸ôÎª0.01µÄÁ½¸öº¯ÊıÖµÒìºÅµÄ³õ²½µã
+    if eval(subyEx(Ky)*subyEx(Ky+0.01*limitKy))<=0    %æ‰¾åˆ°é—´éš”ä¸º0.01çš„ä¸¤ä¸ªå‡½æ•°å€¼å¼‚å·çš„åˆæ­¥ç‚¹
         tempe=Ky;
-           %´ÓÒìºÅ³õ²½µã¿ªÊ¼ÒÔ¼ä¸ô0.0001¾«È·Ñ­»·ÅĞ¶Ï
-        while eval(subyEx(tempe)*subyEx(tempe+0.0001*limitKy))>0    %Ñ­»·ÅĞ¶ÏÕÒµ½¾«È·µÄÒìºÅµã
+           %ä»å¼‚å·åˆæ­¥ç‚¹å¼€å§‹ä»¥é—´éš”0.0001ç²¾ç¡®å¾ªç¯åˆ¤æ–­
+        while eval(subyEx(tempe)*subyEx(tempe+0.0001*limitKy))>0    %å¾ªç¯åˆ¤æ–­æ‰¾åˆ°ç²¾ç¡®çš„å¼‚å·ç‚¹
             tempe=tempe+0.0001*limitKy;
         end
-            solutionKy(1,nKy+1)=tempe;        %½«ÒìºÅµãµÄºá×ø±êÖµ¼´Îªµ¼Ä£µÄÊıÖµ½â
-            solutionKy(2,nKy+1)=tan(2*b*tempe);   %ÒìºÅµãµÄ×İ×ø±êÖµ
-            nKy=nKy+1;                    %¼ÆËã½âµÄ¸öÊı
+            solutionKy(1,nKy+1)=tempe;        %å°†å¼‚å·ç‚¹çš„æ¨ªåæ ‡å€¼å³ä¸ºå¯¼æ¨¡çš„æ•°å€¼è§£
+            solutionKy(2,nKy+1)=tan(2*b*tempe);   %å¼‚å·ç‚¹çš„çºµåæ ‡å€¼
+            nKy=nKy+1;                    %è®¡ç®—è§£çš„ä¸ªæ•°
     end
 end
-solutionKy                                         %ÏÔÊ¾¸÷¸ö½â
-fprintf('ExÄ£Ê½¹²ÓĞ%d¸öÓĞĞ§KyÖµ\n',nKy);              %±íÃ÷ÓĞĞ§½âÊıÁ¿
+solutionKy                                         %æ˜¾ç¤ºå„ä¸ªè§£
+fprintf('Exæ¨¡å¼å…±æœ‰%dä¸ªæœ‰æ•ˆKyå€¼\n',nKy);              %è¡¨æ˜æœ‰æ•ˆè§£æ•°é‡
 
-%*******************¼ÆËãË¥¼õÏµÊı/ÏàÎ»/·ù¶È************************
-v_alpha4x=zeros(1,nKx);             %Ë¥¼õÏµÊı
+%*******************è®¡ç®—è¡°å‡ç³»æ•°/ç›¸ä½/å¹…åº¦************************
+v_alpha4x=zeros(1,nKx);             %è¡°å‡ç³»æ•°
 v_alpha5x=zeros(1,nKx);
 v_alpha2y=zeros(1,nKy);
 v_alpha3y=zeros(1,nKy);
-epsi=zeros(1,nKx);                  %³õÊ¼ÏàÎ»
+epsi=zeros(1,nKx);                  %åˆå§‹ç›¸ä½
 eta=zeros(1,nKy);
-A1=1;                               %´Å³¡Õñ·ùÒò×Ó
+A1=1;                               %ç£åœºæŒ¯å¹…å› å­
 A4=zeros(1,nKx);
 A5=zeros(1,nKx);
 A2=zeros(1,nKy);
 A3=zeros(1,nKy);
 
-for j=1:nKx                         %alpha4x,alpha5xµÄÖµ
+for j=1:nKx                         %alpha4x,alpha5xçš„å€¼
     v_alpha4x(j)=alpha4x(solutionKx(1,j));
     v_alpha5x(j)=alpha5x(solutionKx(1,j));
     epsi(j)=-solutionKx(1,j)*a+atan((n1^2*v_alpha4x(j))/(n4^2*solutionKx(1,j)));
@@ -118,7 +118,7 @@ for j=1:nKx                         %alpha4x,alpha5xµÄÖµ
     A5(j)=A1*cos(a*solutionKx(1,j)-epsi(j))/(exp(-a*v_alpha5x(j)));
 end
 
-for t=1:nKy                         %alpha2y,alpha3yµÄÖµ
+for t=1:nKy                         %alpha2y,alpha3yçš„å€¼
     v_alpha2y(t)=alpha2y(solutionKy(1,t));
     v_alpha3y(t)=alpha3y(solutionKy(1,t));
     eta(t)=-solutionKy(1,t)*b+atan(v_alpha3y(t)/solutionKy(1,t));
@@ -126,29 +126,29 @@ for t=1:nKy                         %alpha2y,alpha3yµÄÖµ
     A3(t)=A1*cos(b*solutionKy(1,t)+eta(t))/exp(-b*v_alpha3y(t));
 end
 
-%**************************¸÷¸öÄ£Ê½ÏÂ´Å³¡µÄ·Ö²¼*********************
+%**************************å„ä¸ªæ¨¡å¼ä¸‹ç£åœºçš„åˆ†å¸ƒ*********************
 beta=zeros(nKx,nKy);
 for j=1:nKx
     for t=1:nKy
-        %´«²¥³£Êı
+        %ä¼ æ’­å¸¸æ•°
         beta(j,t)=sqrt((n1*k0)^2-solutionKx(j)^2-solutionKy(t)^2);
         
-        %y·½Ïò´Å³¡
+        %yæ–¹å‘ç£åœº
         H1(X,Y)=A1*cos(solutionKx(1,j)*X+epsi(j))*cos(solutionKy(1,t)*Y+eta(t));
         H2(X,Y)=A2(t)*cos(solutionKx(1,j)*X+epsi(j))*exp(v_alpha2y(t)*Y);
         H3(X,Y)=A3(t)*cos(solutionKx(1,j)*X+epsi(j))*exp(-v_alpha3y(t)*Y);
         H4(X,Y)=A4(j)*cos(solutionKy(1,t)*Y+eta(t))*exp(-v_alpha4x(j)*X);
         H5(X,Y)=A5(j)*cos(solutionKy(1,t)*Y+eta(t))*exp(v_alpha5x(j)*X);
         
-        %x·½Ïòµç³¡
+        %xæ–¹å‘ç”µåœº
         E1(X,Y)=H1(X,Y)*(w*u0-solutionKx(j)^2/(w*u0*(n1^2)))/beta(j,t);
         E2(X,Y)=H2(X,Y)*(w*u0-solutionKx(j)^2/(w*u0*(n2^2)))/beta(j,t);
         E3(X,Y)=H3(X,Y)*(w*u0-solutionKx(j)^2/(w*u0*(n3^2)))/beta(j,t);
         E4(X,Y)=H4(X,Y)*(w*u0+alpha4x(j)^2/(w*u0*(n4^2)))/beta(j,t);
         E5(X,Y)=H5(X,Y)*(w*u0+alpha5x(j)^2/(w*u0*(n5^2)))/beta(j,t);
         
-        %ÏÔÊ¾´Å³¡·Ö²¼º¯Êı
-        fprintf('ExµÄ%d%dÄ£Ê½\n',j,t);
+        %æ˜¾ç¤ºç£åœºåˆ†å¸ƒå‡½æ•°
+        fprintf('Exçš„%d%dæ¨¡å¼\n',j,t);
         fprintf('H1\n');
         vpa(H1,5)
         fprintf('H2\n');
@@ -160,7 +160,7 @@ for j=1:nKx
         fprintf('H5\n');
         vpa(H5,5)
         
-        %ÏÔÊ¾µç³¡·Ö²¼º¯Êı
+        %æ˜¾ç¤ºç”µåœºåˆ†å¸ƒå‡½æ•°
         fprintf('E1\n');
         vpa(E1,5)
         fprintf('E2\n');
@@ -172,18 +172,18 @@ for j=1:nKx
         fprintf('E5\n');
         vpa(E5,5)
         
-        %»­³ö¸÷¸öÄ£Ê½ÏÂ´Å³¡µÄ·Ö²¼
-        figure(j+2*t);                      %·Ö»­²¼
+        %ç”»å‡ºå„ä¸ªæ¨¡å¼ä¸‹ç£åœºçš„åˆ†å¸ƒ
+        figure(j+2*t);                      %åˆ†ç”»å¸ƒ
         x=-2*a:0.02*a:2*a;
         y=-2*b:0.02*b:2*b;
-        [xx,yy]=meshgrid(x,y);              %½¨Á¢Íø¸ñ
+        [xx,yy]=meshgrid(x,y);              %å»ºç«‹ç½‘æ ¼
         Pic_H1=(A1*cos(solutionKx(1,j)*xx+epsi(j)).*cos(solutionKy(1,t)*yy+eta(t)));
         Pic_H2=(A2(t)*cos(solutionKx(1,j)*xx+epsi(j)).*exp(v_alpha2y(t)*yy));
         Pic_H3=(A3(t)*cos(solutionKx(1,j)*xx+epsi(j)).*exp(-v_alpha3y(t)*yy));
         Pic_H4=(A4(j)*cos(solutionKy(1,t)*yy+eta(t)).*exp(-v_alpha4x(j)*xx));
         Pic_H5=(A5(j)*cos(solutionKy(1,t)*yy+eta(t)).*exp(v_alpha5x(j)*xx));
         Pic_H=Pic_H1.*((xx>=-a)&(xx<=a)&(yy>=-b)&(yy<=b))+Pic_H2.*((xx>-a)&(xx<a)&(yy<-b))+Pic_H3.*((xx>-a)&(xx<a)&(yy>b))+Pic_H4.*((yy>-b)&(yy<b)&(xx>a))+Pic_H5.*((yy>-b)&(yy<b)&(xx<-a));
-        meshc(xx,yy,Pic_H)                  %»­ÈıÎ¬ÍøÏßÍ¼ 
+        meshc(xx,yy,Pic_H)                  %ç”»ä¸‰ç»´ç½‘çº¿å›¾ 
         hidden off;
         hold on;
         title('H');
